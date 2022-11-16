@@ -1,6 +1,6 @@
-@use 'colors';
+@use 'colors' as colors;
 @use 'components';
-@use 'mixins';
+@use 'mixins' as mixins;
 
 // @use 'reset'
 // @use 'typography'
@@ -18,14 +18,66 @@
 	padding: 0;
 }
 
-html{
-    font-size: 62.5%;
-    scroll-behavior: smooth;
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
 }
 
-body{
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.6rem;
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.6rem;
 }
 
+// NAV
 
+.burger-btn {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	padding: 1em;
+	background: none;
+	border: 1px solid transparent;
+	cursor: pointer;
+	z-index: 1000;
+
+	&:focus {
+		outline: none;
+		border: 1px solid rgba (255, 255, 255, 0.5);
+		border-radius: 8px;
+	}
+
+	&__box {
+		position: relative;
+		width: 40px;
+		height: 30px;
+	}
+
+	&__bars,
+	&__bars::after,
+	&__bars::before {
+		// mixin dla przypomnienia działania
+		@include mixins.burgerBtn;
+	}
+
+	&__bars {
+		width: 100%;
+
+		&::after {
+			top: 13px;
+			width: 60%;
+		}
+
+		&::before {
+			top: 27px;
+			width: 30%;
+			transition-delay: 0.1s;
+		}
+	}
+
+	&:hover {
+		.burger-btn__bars::after,
+		.burger-btn__bars::before {
+			width: 100%;
+		}
+	}
+}
